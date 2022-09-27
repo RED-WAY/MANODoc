@@ -218,12 +218,13 @@ INSERT INTO operationRunning VALUES
     
 /*Creation of LogKilledOperation table*/
 CREATE TABLE logKilledOperation (
-	idLogKilledOperation INT AUTO_INCREMENT,
+	idLogKilledOperation INT AUTO_INCREMENT, 
 	dtOperationKill DATETIME DEFAULT CURRENT_TIMESTAMP, 
-	operationName VARCHAR (50),
-	fkMachine INT,
-    FOREIGN KEY (fkMachine) REFERENCES machine(idMachine),
-    PRIMARY KEY (idLogKilledOperation, fkMachine)
+    fkOperation INT, 
+	FOREIGN KEY (fkOperation) REFERENCES operation(idOperation), 
+	fkMachine INT, 
+    FOREIGN KEY (fkMachine) REFERENCES machine(idMachine), 	
+    PRIMARY KEY (idLogKilledOperation, fkMachine) 
 );
 
 /*Description of LogKilledOperation table*/
@@ -231,12 +232,12 @@ DESC logKilledOperation;
 
 /*LogKilledOperation data insertion*/
 INSERT INTO logKilledOperation VALUES 
-	(null, NOW(), "vscode.running", 2),
-    (null, NOW(), "steam.com.running", 3),
-    (null, NOW(), "epicgames.com.running", 4),
-    (null, NOW(), "minecraft.com.running", 5),
-    (null, NOW(), "steam.com.running", 6), 
-    (null, NOW(), "friv.com.running", 7);
+	(null, NOW(), 1, 2),
+    (null, NOW(), 2, 3),
+    (null, NOW(), 3, 4),
+    (null, NOW(), 4, 5),
+    (null, NOW(), 5, 6), 
+    (null, NOW(), 6, 7);
 
 /*Beginning of the selects (data showing):*/
 
@@ -250,11 +251,6 @@ SELECT * FROM family;
 SELECT * FROM operationLog;
 SELECT * FROM logKilledOperation;
 SELECT * FROM companyOperations;
-
-/*-----------------------------------------------------*/
-
-
-
 
 /*-----------------------------------------------------*/
 
