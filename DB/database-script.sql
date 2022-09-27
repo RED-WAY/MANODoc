@@ -46,19 +46,19 @@ DESC Consumer;
 /*Consumer data insertion*/
 INSERT INTO consumer VALUES 
 	(null, "test", "test@gmail.com", AES_ENCRYPT("1234", "corinthians"), "MASTER", default, null, 1),
-    (null, "Vinicius Mengo", "vinicinho@gmail.com", AES_ENCRYPT("Ab45579021", "corinthians"), "ADMIN", default, null, 2),
+    (null, "test2", "test2@gmail.com", AES_ENCRYPT("1234", "corinthians"), "MASTER", default, null, 2),
     (null, "Danillo Borba", "danborba@gmail.com", AES_ENCRYPT("Baa34569034", "corinthians"), "MASTER", default, 1, 1),
     (null, "Paulo Ranea", "paulogono@hotmail.com", AES_ENCRYPT("UUU38535850", "corinthians"), "ADMIN", default, 2, 2),
     (null, "Andrey Gigabyte", "andgiga@gmail.com", AES_ENCRYPT("Dew255948947", "corinthians"), "ADMIN", default, 3, 1),
     (null, "Arthur Itaquerense", "artitaq@gmail.com", AES_ENCRYPT("bwf36234366", "corinthians"), "ANALYST", default, 1, 1),
-    (null, "Alvarenga Pizza", "alvspizza@outlook.com", AES_ENCRYPT("Bafw39597927", "corinthians"), "ANALYST", default, null, 3);
+    (null, "Vinicius Mengo", "vinicinho@gmail.com", AES_ENCRYPT("Ab45579021", "corinthians"), "ANALYST", default, null, 3);
 
 /*Creation of Family table*/
 CREATE TABLE family (
 	idFamily INT PRIMARY KEY AUTO_INCREMENT,
 	familyName VARCHAR (15),
-	accessLevel VARCHAR (45), CONSTRAINT chkAccessLevel CHECK 
-	(accessLevel = "Student" OR accessLevel = "Junior" OR accessLevel = "InCharge" OR accessLevel = "Adm"),
+	familyLevel VARCHAR (45), CONSTRAINT chkAccessLevel CHECK 
+	(familyLevel = "Student" OR familyLevel = "Junior" OR familyLevel = "InCharge" OR familyLevel = "Adm"),
 	fkCompany INT,
 	FOREIGN KEY (fkCompany) REFERENCES company (idCompany)
 );
@@ -67,12 +67,14 @@ CREATE TABLE family (
 DESC family;
 
 /*Family data insertion*/
+/*
 INSERT INTO family VALUES
     (null, "Grupo 1", "Adm", 2),
     (null, "Grupo 4", "InCharge", 3),
     (null, "12° Setor", "Junior", 1),
     (null, "Group 8", "Junior", 4),
     (null, "21° Setor", "Student", 1);
+*/
 
 /*Creation of Machine table*/
 CREATE TABLE machine (
@@ -81,8 +83,8 @@ CREATE TABLE machine (
     dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
     isUsing CHAR(3) DEFAULT 'not', CONSTRAINT chkMachineUse CHECK 
 	(isUsing = "yes" OR isUsing = "not"),
-    fkConsumerAdder INT,
-    FOREIGN KEY (fkConsumerAdder) REFERENCES consumer(idConsumer),
+    fkConsumer INT,
+    FOREIGN KEY (fkConsumer) REFERENCES consumer(idConsumer),
 	fkCompany INT,
 	FOREIGN KEY (fkCompany) REFERENCES company(idCompany),
 	fkFamily INT,
@@ -93,6 +95,7 @@ CREATE TABLE machine (
 DESC machine;
 
 /*Machine data insertion*/
+/*
 INSERT INTO machine VALUES
 	(null, "Chrome01", NOW(), DEFAULT, 1, 2, 2),
     (null, "Chrome02", NOW(), DEFAULT, 2, 2, 3),
@@ -101,6 +104,7 @@ INSERT INTO machine VALUES
     (null, "Dell01", NOW(), DEFAULT, 4, 1, 3),
     (null, "Samsung03", NOW(), DEFAULT, 1, 5, 2),
     (null, "Samsung06", NOW(), DEFAULT, 2, 5, 3);
+*/
 
 /*Creation of Hardware table*/
 CREATE TABLE hardware (
@@ -118,6 +122,7 @@ CREATE TABLE hardware (
 DESC hardware;
 
 /*Hardware data insertion*/
+/*
 INSERT INTO hardware VALUES 
 	(null, 15, 42, 5, 10, 10, 2),
 	(null, 34, 5, 25, 44, 11, 5),
@@ -125,7 +130,8 @@ INSERT INTO hardware VALUES
 	(null, 56, 35, 47, 87, 13, 3),
 	(null, 44, 54, 74, 63, 8, 5),
 	(null, 17, 51, 73, 43, 11, 4);
-    
+*/
+
 /*Creation of Operation table*/
 CREATE TABLE operation (
 	idOperation INT PRIMARY KEY AUTO_INCREMENT,
@@ -139,6 +145,7 @@ CREATE TABLE operation (
 DESC operation;
 
 /*Operation data insertion*/ 
+/*
 INSERT INTO operation VALUES
 	(null, "Google Classroom", "https://classroom.google.com/", "desktop"),
     (null, "Plurall", "https://www.plurall.net/", "web"),
@@ -146,6 +153,7 @@ INSERT INTO operation VALUES
     (null, "MySQL Workbench", "https://www.mysql.com/", "desktop"),
     (null, "Outlook", "https://outlook.live.com/owa/", "web"),
     (null, "Youtube", "https://www.youtube.com/?gl=BR&hl=pt", "web");    
+*/
 
 /*Creation of CompanyOperations table*/
 CREATE TABLE companyOperations (
@@ -161,6 +169,7 @@ CREATE TABLE companyOperations (
 DESC companyOperations;
 
 /*CompanyOperations data insertion*/
+/*
 INSERT INTO companyOperations VALUES 
 	(null, 4, 3),
     (null, 1, 3),
@@ -168,28 +177,31 @@ INSERT INTO companyOperations VALUES
     (null, 3, 1),
     (null, 2, 2),
     (null, 2, 5);
+*/
 
-/*Creation of OperationLog table*/
-CREATE TABLE operationLog (
-	idOperationLog INT AUTO_INCREMENT,
+/*Creation of FamilyOperations table*/
+CREATE TABLE familyOperations (
+	idFamilyOperations INT AUTO_INCREMENT,
 	fkOperation INT,
     FOREIGN KEY (fkOperation) REFERENCES operation(idOperation),
     fkFamily INT,
 	FOREIGN KEY (fkFamily) REFERENCES family(idFamily),
-    PRIMARY KEY (idOperationLog, fkOperation, fkFamily)
+    PRIMARY KEY (idFamilyOperations, fkOperation, fkFamily)
 );
 
 /*Description of Operation table*/
-DESC operationLog;
+DESC familyOperations;
 
-/*OperationLog data insertion*/
-INSERT INTO operationLog VALUES
+/*FamilyOperations data insertion*/
+/*
+INSERT INTO familyOperations VALUES
 	(null, 2, 1),
     (null, 3, 4),
     (null, 1, 3),
     (null, 1, 5),
     (null, 5, 1),
     (null, 4, 4);
+*/
     
 /*Creation of OperationRunning table*/
 CREATE TABLE operationRunning (
@@ -208,6 +220,7 @@ CREATE TABLE operationRunning (
 DESC operationRunning;
 
 /*OperationRunning data insertion*/
+/*
 INSERT INTO operationRunning VALUES
 	(null, 1, 4, "running", NOW()),
     (null, 2, 3, "stopped", NOW()),
@@ -215,6 +228,7 @@ INSERT INTO operationRunning VALUES
     (null, 4, 4, "running", NOW()),
     (null, 5, 5, "stopped", NOW()),
     (null, 6, 2, "running", NOW());
+*/
     
 /*Creation of LogKilledOperation table*/
 CREATE TABLE logKilledOperation (
@@ -231,6 +245,7 @@ CREATE TABLE logKilledOperation (
 DESC logKilledOperation;
 
 /*LogKilledOperation data insertion*/
+/*
 INSERT INTO logKilledOperation VALUES 
 	(null, NOW(), 1, 2),
     (null, NOW(), 2, 3),
@@ -238,6 +253,8 @@ INSERT INTO logKilledOperation VALUES
     (null, NOW(), 4, 5),
     (null, NOW(), 5, 6), 
     (null, NOW(), 6, 7);
+*/
+
 
 /*Beginning of the selects (data showing):*/
 
@@ -248,7 +265,7 @@ SELECT * FROM hardware;
 SELECT * FROM operationRunning;
 SELECT * FROM operation;
 SELECT * FROM family;
-SELECT * FROM operationLog;
+SELECT * FROM familyOperations;
 SELECT * FROM logKilledOperation;
 SELECT * FROM companyOperations;
 
