@@ -241,7 +241,6 @@ SELECT * FROM operationRunning;
 SELECT * FROM operation;
 SELECT * FROM family;
 SELECT * FROM familyOperations;
-SELECT * FROM logKilledOperation;
 SELECT * FROM companyOperations;
 
 /*-----------------------------------------------------*/
