@@ -229,31 +229,6 @@ INSERT INTO operationRunning VALUES
     (null, 5, 5, "stopped", NOW()),
     (null, 6, 2, "running", NOW());
 */
-    
-/*Creation of LogKilledOperation table*/
-CREATE TABLE logKilledOperation (
-	idLogKilledOperation INT AUTO_INCREMENT, 
-	dtOperationKill DATETIME DEFAULT CURRENT_TIMESTAMP, 
-    fkOperation INT, 
-	FOREIGN KEY (fkOperation) REFERENCES operation(idOperation), 
-	fkMachine INT, 
-    FOREIGN KEY (fkMachine) REFERENCES machine(idMachine), 	
-    PRIMARY KEY (idLogKilledOperation, fkMachine) 
-);
-
-/*Description of LogKilledOperation table*/
-DESC logKilledOperation;
-
-/*LogKilledOperation data insertion*/
-/*
-INSERT INTO logKilledOperation VALUES 
-	(null, NOW(), 1, 2),
-    (null, NOW(), 2, 3),
-    (null, NOW(), 3, 4),
-    (null, NOW(), 4, 5),
-    (null, NOW(), 5, 6), 
-    (null, NOW(), 6, 7);
-*/
 
 
 /*Beginning of the selects (data showing):*/
