@@ -182,11 +182,11 @@ INSERT INTO companyOperations VALUES
 /*Creation of FamilyOperations table*/
 CREATE TABLE familyOperations (
 	idFamilyOperations INT AUTO_INCREMENT,
-	fkOperation INT,
-    FOREIGN KEY (fkOperation) REFERENCES operation(idOperation),
+	fkCompanyOperations INT,
+    FOREIGN KEY (fkCompanyOperations) REFERENCES companyOperations(idCompanyOperations),
     fkFamily INT,
 	FOREIGN KEY (fkFamily) REFERENCES family(idFamily),
-    PRIMARY KEY (idFamilyOperations, fkOperation, fkFamily)
+    PRIMARY KEY (idFamilyOperations, fkCompanyOperations, fkFamily)
 );
 
 /*Description of Operation table*/
