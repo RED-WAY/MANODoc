@@ -9,9 +9,9 @@ USE MANOSecurity;
 /*Creation of Company Table:*/
 CREATE TABLE company (
 	idCompany INT PRIMARY KEY AUTO_INCREMENT,
-	companyName VARCHAR (50),
-	companyEmail VARCHAR (90),
-    CNPJ VARCHAR (14)
+	companyName VARCHAR (50) UNIQUE,
+	companyEmail VARCHAR (90) UNIQUE,
+    CNPJ VARCHAR (14) UNIQUE
 );
 
 /*Description of the company table:*/
@@ -29,7 +29,7 @@ INSERT INTO company VALUES
 CREATE TABLE consumer (
 	idConsumer INT PRIMARY KEY AUTO_INCREMENT,
 	consumerName VARCHAR (50),
-	consumerEmail VARCHAR (50),
+	consumerEmail VARCHAR (50) UNIQUE,
 	consumerPassword VARBINARY(150),
 	management VARCHAR (8), CONSTRAINT chkManagement CHECK 
 	(management = "MASTER" or management = "ADMIN" or management = "ANALYST"),	
