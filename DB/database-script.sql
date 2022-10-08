@@ -96,40 +96,52 @@ DESC machine;
 
 /*Machine data insertion*/
 
-INSERT INTO machine VALUES
-	(null, "Chrome01", NOW(), DEFAULT, 1, 2, 2),
-    (null, "Chrome02", NOW(), DEFAULT, 2, 2, 3),
-    (null, "Chrome03", NOW(), DEFAULT, 2, 2, 4),
-    (null, "Chrome04", NOW(), DEFAULT, 3, 2, 5),
-    (null, "Dell01", NOW(), DEFAULT, 4, 1, 3),
-    (null, "Samsung03", NOW(), DEFAULT, 1, 5, 2),
-    (null, "Samsung06", NOW(), DEFAULT, 2, 5, 3);
+--INSERT INTO machine VALUES
+--	(null, "Chrome01", NOW(), DEFAULT, 1, 2, 2),
+--	(null, "Chrome02", NOW(), DEFAULT, 2, 2, 3),
+--	(null, "Chrome03", NOW(), DEFAULT, 2, 2, 4),
+--	(null, "Chrome04", NOW(), DEFAULT, 3, 2, 5),
+--	(null, "Dell01", NOW(), DEFAULT, 4, 1, 3),
+--	(null, "Samsung03", NOW(), DEFAULT, 1, 5, 2),
+--	(null, "Samsung06", NOW(), DEFAULT, 2, 5, 3);
 
 
-/*Creation of Hardware table*/
-CREATE TABLE hardware (
-	idHardware INT PRIMARY KEY AUTO_INCREMENT,
-	CPU_Util TINYINT,
-	RAM_Util TINYINT,
-	HardDisk_Util TINYINT,
-	Memory_Util TINYINT,
-	CPU_Temp INT,
+/*Creation of ConstantHardware table*/
+CREATE TABLE constantHardware (
+	idConstantHardware INT PRIMARY KEY IDENTITY(1,1),
+	cpuName VARCHAR(80),
+	cpuCore INT,
+	ramSize DECIMAL(4,1),
+	diskModel VARCHAR(80),
+	diskSize DECIMAL(5,2),
+	operationalSystem VARCHAR(40),
 	fkMachine INT,
 	FOREIGN KEY (fkMachine) REFERENCES machine(idMachine)
 );
 
-/*Description of Hardware table*/
-DESC hardware;
+/*Description of ConstantHardware table*/
+DESC constantHardware;
 
-/*Hardware data insertion*/
+/*ConstantHardware data insertion*/
+-- INSERT INTO constantHardware VALUES ();
 
-INSERT INTO hardware VALUES 
-	(null, 15, 42, 5, 10, 10, 2),
-	(null, 34, 5, 25, 44, 11, 5),
-	(null, 46, 26, 41, 52, 9, 1),
-	(null, 56, 35, 47, 87, 13, 3),
-	(null, 44, 54, 74, 63, 8, 5),
-	(null, 17, 51, 73, 43, 11, 4);
+/*Creation of DynamicHardware table*/
+CREATE TABLE dynamicHardware (
+	idDynamicHardware INT PRIMARY KEY IDENTITY(1,1),
+	cpu VARCHAR(80),
+	ram INT,
+	activityTime INT,
+	fkMachine INT,
+	FOREIGN KEY (fkMachine) REFERENCES machine(idMachine)
+);
+
+/*Description of DynamicHardware table*/
+DESC dynamicHardware;
+
+/*DynamicHardware data insertion*/
+
+INSERT INTO dynamicHardware VALUES 
+	();
 
 
 /*Creation of Operation table*/
@@ -251,18 +263,106 @@ AND isUsing = "not";
 /*-----------------------------------------------------*/
 
 /* SQL SERVER - AZURE */
- 
-CREATE TABLE user (
-	idUser INT PRIMARY KEY IDENTITY(1,1),
-	userName VARCHAR(50),
-	userEmail VARCHAR(50),
-	userPassword VARBINARY(150), /*VERIFY*/
-	entryDate TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP /*VERIFY*/
-); 
 
-CREATE TABLE post (
-	idPost INT PRIMARY KEY IDENTITY(1,1),
-	title VARCHAR(100),
-	fkUser INT FOREIGN KEY REFERENCES user(idUser)
+CREATE TABLE company
+(
+    idCompany INT PRIMARY KEY IDENTITY(1,1),
+    companyName VARCHAR (50) UNIQUE,
+    companyEmail VARCHAR (90) UNIQUE,
+    CNPJ VARCHAR (14) UNIQUE
+);
+
+CREATE TABLE consumer
+(
+    idConsumer INT PRIMARY KEY IDENTITY(1,1),
+    consumerName VARCHAR (50),
+    consumerEmail VARCHAR (50) UNIQUE,
+    consumerPassword VARBINARY(150),
+    management VARCHAR (8),
+    CONSTRAINT chkManagement CHECK 
+	(management = 'MASTER' or management = 'ADMIN' or management = 'ANALYST'),
+    dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fkManager INT FOREIGN KEY REFERENCES consumer(idConsumer),
+    fkCompany INT FOREIGN KEY REFERENCES company(idCompany)
+);
+
+CREATE TABLE family
+(
+    idFamily INT PRIMARY KEY IDENTITY(1,1),
+    familyName VARCHAR (15),
+    familyLevel VARCHAR (45),
+    CONSTRAINT chkFamilyLevel CHECK 
+	(familyLevel = 'Student' OR familyLevel = 'Junior' OR familyLevel = 'InCharge' OR familyLevel = 'Adm'),
+    fkCompany INT FOREIGN KEY REFERENCES company (idCompany)
+);
+
+CREATE TABLE machine
+(
+    idMachine INT PRIMARY KEY IDENTITY(1,1),
+    manoCode VARCHAR (30) UNIQUE,
+    machineName VARCHAR (20),
+    dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
+    isUsing CHAR(3) DEFAULT 'not',
+    CONSTRAINT chkMachineUse CHECK 
+	(isUsing = 'yes' OR isUsing = 'not'),
+    fkConsumer INT FOREIGN KEY REFERENCES consumer(idConsumer),
+    fkCompany INT FOREIGN KEY REFERENCES company(idCompany),
+    fkFamily INT FOREIGN KEY REFERENCES family(idFamily)
+);
+
+CREATE TABLE constantHardware
+(
+    idConstantHardware INT PRIMARY KEY IDENTITY(1,1),
+    cpuName VARCHAR(80),
+    cpuCore INT,
+    ramSize DECIMAL(4,1),
+    diskModel VARCHAR(80),
+    diskSize DECIMAL(5,2),
+    operationalSystem VARCHAR(40),
+    fkMachine INT FOREIGN KEY REFERENCES machine(idMachine)
+);
+
+CREATE TABLE dynamicHardware
+(
+    idDynamicHardware INT PRIMARY KEY IDENTITY(1,1),
+    cpu VARCHAR(80),
+    ram INT,
+    activityTime INT,
+    fkMachine INT FOREIGN KEY REFERENCES machine(idMachine)
+);
+
+CREATE TABLE operation
+(
+    idOperation INT PRIMARY KEY IDENTITY(1,1),
+    operationName VARCHAR (50),
+    operationPath VARCHAR (150),
+    operationType CHAR (7),
+    CONSTRAINT chkOperationType CHECK 
+	(operationType = 'web' or operationType = 'desktop')
+);
+
+CREATE TABLE companyOperations
+(
+    idCompanyOperations INT PRIMARY KEY IDENTITY(1,1),
+    fkCompany INT FOREIGN KEY REFERENCES company(idCompany),
+    fkOperation INT FOREIGN KEY REFERENCES operation(idOperation)
+);
+
+CREATE TABLE familyOperations
+(
+    idFamilyOperations INT PRIMARY KEY IDENTITY(1,1),
+    fkCompanyOperations INT FOREIGN KEY REFERENCES companyOperations(idCompanyOperations),
+    fkFamily INT FOREIGN KEY REFERENCES family(idFamily)
+);
+
+CREATE TABLE operationRunning
+(
+    idOperationRunning INT PRIMARY KEY IDENTITY(1,1),
+    operationStats CHAR (7),
+    CONSTRAINT chkOperationStats CHECK 
+	(operationStats = 'running' or operationStats = 'stopped'),
+    lastUsed DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fkMachine INT FOREIGN KEY REFERENCES Machine(idMachine),
+    fkOperation INT FOREIGN KEY REFERENCES Operation(idOperation)
 );
 
