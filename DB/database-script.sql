@@ -340,7 +340,6 @@ CREATE TABLE dynamicHardware
     cpu INT,
     ram INT,
     activityTime VARCHAR(30),
-    dtAdded 
     dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
     fkMachine INT FOREIGN KEY REFERENCES machine(idMachine)
 );
