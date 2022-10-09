@@ -18,12 +18,16 @@ CREATE TABLE company (
 DESC company;
 
 /*Company Data insertion:*/
-INSERT INTO company VALUES
-    (null, "Colegio da PM Penha", "colegiopmpen@outlook.com", "12345678901234"),
-    (null, "Colegio Dom Bosco", "colegiodombosco@outlook.com", "09876543210987"),
-    (null, "Escola Adventista do Sul", "adventistadosul@outlook.com", "12345654321234"),
-    (null, "Colegio da PM Centro", "colegiopmcen@outlook.com", "09876567890987"),
-    (null, "Colegio Grili Magalhães", "grilimagalhaes@outlook.com", "10293847565748");
+INSERT INTO company VALUES 
+    (NULL, 'SPTech', 'sptechschool@gmail.com', '12345678901234'),
+    (NULL, 'ETEC', 'etecschoo@gmail.com', '09876543210987');
+-- INSERT INTO company VALUES
+--     (null, "Colegio da PM Penha", "colegiopmpen@outlook.com", "12345678901234"),
+--     (null, "Colegio Dom Bosco", "colegiodombosco@outlook.com", "09876543210987"),
+--     (null, "Escola Adventista do Sul", "adventistadosul@outlook.com", "12345654321234"),
+--     (null, "Colegio da PM Centro", "colegiopmcen@outlook.com", "09876567890987"),
+--     (null, "Colegio Grili Magalhães", "grilimagalhaes@outlook.com", "10293847565748");
+    
 
 /*Creation of Consumer table*/
 CREATE TABLE consumer (
@@ -45,13 +49,16 @@ DESC Consumer;
 
 /*Consumer data insertion*/
 INSERT INTO consumer VALUES 
-	(null, "test", "test@gmail.com", AES_ENCRYPT("1234", "corinthians"), "MASTER", default, null, 1),
-    (null, "test2", "test2@gmail.com", AES_ENCRYPT("1234", "corinthians"), "MASTER", default, null, 2),
-    (null, "Danillo Borba", "danborba@gmail.com", AES_ENCRYPT("Baa34569034", "corinthians"), "MASTER", default, 1, 1),
-    (null, "Paulo Ranea", "paulogono@hotmail.com", AES_ENCRYPT("UUU38535850", "corinthians"), "ADMIN", default, 2, 2),
-    (null, "Andrey Gigabyte", "andgiga@gmail.com", AES_ENCRYPT("Dew255948947", "corinthians"), "ADMIN", default, 3, 1),
-    (null, "Arthur Itaquerense", "artitaq@gmail.com", AES_ENCRYPT("bwf36234366", "corinthians"), "ANALYST", default, 1, 1),
-    (null, "Vinicius Mengo", "vinicinho@gmail.com", AES_ENCRYPT("Ab45579021", "corinthians"), "ANALYST", default, null, 3);
+    (NULL, 'test', 'test@gmail.com', AES_ENCRYPT("1234", "corinthians"), 'MASTER', DEFAULT, NULL, 1),
+    (NULL, 'test2', 'test2@gmail.com', AES_ENCRYPT("1234", "corinthians"), 'MASTER', DEFAULT, NULL, 2);
+-- INSERT INTO consumer VALUES 
+-- 	(null, "test", "test@gmail.com", AES_ENCRYPT("1234", "corinthians"), "MASTER", default, null, 1),
+--     (null, "test2", "test2@gmail.com", AES_ENCRYPT("1234", "corinthians"), "MASTER", default, null, 2),
+--     (null, "Danillo Borba", "danborba@gmail.com", AES_ENCRYPT("Baa34569034", "corinthians"), "MASTER", default, 1, 1),
+--     (null, "Paulo Ranea", "paulogono@hotmail.com", AES_ENCRYPT("UUU38535850", "corinthians"), "ADMIN", default, 2, 2),
+--     (null, "Andrey Gigabyte", "andgiga@gmail.com", AES_ENCRYPT("Dew255948947", "corinthians"), "ADMIN", default, 3, 1),
+--     (null, "Arthur Itaquerense", "artitaq@gmail.com", AES_ENCRYPT("bwf36234366", "corinthians"), "ANALYST", default, 1, 1),
+--     (null, "Vinicius Mengo", "vinicinho@gmail.com", AES_ENCRYPT("Ab45579021", "corinthians"), "ANALYST", default, null, 3);
 
 /*Creation of Family table*/
 CREATE TABLE family (
@@ -68,17 +75,18 @@ DESC family;
 
 /*Family data insertion*/
 
-INSERT INTO family VALUES
-    (null, "Grupo 1", "Adm", 2),
-    (null, "Grupo 4", "InCharge", 3),
-    (null, "12° Setor", "Junior", 1),
-    (null, "Group 8", "Junior", 4),
-    (null, "21° Setor", "Student", 1);
+-- INSERT INTO family VALUES
+--     (null, "Grupo 1", "Adm", 2),
+--     (null, "Grupo 4", "InCharge", 3),
+--     (null, "12° Setor", "Junior", 1),
+--     (null, "Group 8", "Junior", 4),
+--     (null, "21° Setor", "Student", 1);
 
 
 /*Creation of Machine table*/
 CREATE TABLE machine (
 	idMachine INT PRIMARY KEY AUTO_INCREMENT,
+    manoCode VARCHAR (30),
     machineName VARCHAR (20),
     dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
     isUsing CHAR(3) DEFAULT 'not', CONSTRAINT chkMachineUse CHECK 
@@ -96,7 +104,7 @@ DESC machine;
 
 /*Machine data insertion*/
 
---INSERT INTO machine VALUES
+-- INSERT INTO machine VALUES
 --	(null, "Chrome01", NOW(), DEFAULT, 1, 2, 2),
 --	(null, "Chrome02", NOW(), DEFAULT, 2, 2, 3),
 --	(null, "Chrome03", NOW(), DEFAULT, 2, 2, 4),
@@ -108,7 +116,7 @@ DESC machine;
 
 /*Creation of ConstantHardware table*/
 CREATE TABLE constantHardware (
-	idConstantHardware INT PRIMARY KEY IDENTITY(1,1),
+	idConstantHardware INT PRIMARY KEY AUTO_INCREMENT,
 	cpuName VARCHAR(80),
 	cpuCore INT,
 	ramSize DECIMAL(4,1),
@@ -127,7 +135,7 @@ DESC constantHardware;
 
 /*Creation of DynamicHardware table*/
 CREATE TABLE dynamicHardware (
-	idDynamicHardware INT PRIMARY KEY IDENTITY(1,1),
+	idDynamicHardware INT PRIMARY KEY AUTO_INCREMENT,
 	cpu VARCHAR(80),
 	ram INT,
 	activityTime INT,
@@ -140,8 +148,7 @@ DESC dynamicHardware;
 
 /*DynamicHardware data insertion*/
 
-INSERT INTO dynamicHardware VALUES 
-	();
+-- INSERT INTO dynamicHardware VALUES ();
 
 
 /*Creation of Operation table*/
@@ -158,13 +165,13 @@ DESC operation;
 
 /*Operation data insertion*/ 
 
-INSERT INTO operation VALUES
-	(null, "Google Classroom", "https://classroom.google.com/", "desktop"),
-    (null, "Plurall", "https://www.plurall.net/", "web"),
-    (null, "Visual Studio Code", "https://code.visualstudio.com/", "desktop"),
-    (null, "MySQL Workbench", "https://www.mysql.com/", "desktop"),
-    (null, "Outlook", "https://outlook.live.com/owa/", "web"),
-    (null, "Youtube", "https://www.youtube.com/?gl=BR&hl=pt", "web");    
+-- INSERT INTO operation VALUES
+-- 	(null, "Google Classroom", "https://classroom.google.com/", "desktop"),
+--     (null, "Plurall", "https://www.plurall.net/", "web"),
+--     (null, "Visual Studio Code", "https://code.visualstudio.com/", "desktop"),
+--     (null, "MySQL Workbench", "https://www.mysql.com/", "desktop"),
+--     (null, "Outlook", "https://outlook.live.com/owa/", "web"),
+--     (null, "Youtube", "https://www.youtube.com/?gl=BR&hl=pt", "web");    
 
 
 /*Creation of CompanyOperations table*/
@@ -182,13 +189,13 @@ DESC companyOperations;
 
 /*CompanyOperations data insertion*/
 
-INSERT INTO companyOperations VALUES 
-	(null, 4, 3),
-    (null, 1, 3),
-    (null, 5, 4),
-    (null, 3, 1),
-    (null, 2, 2),
-    (null, 2, 5);
+-- INSERT INTO companyOperations VALUES 
+-- 	(null, 4, 3),
+--     (null, 1, 3),
+--     (null, 5, 4),
+--     (null, 3, 1),
+--     (null, 2, 2),
+--     (null, 2, 5);
 
 
 /*Creation of FamilyOperations table*/
@@ -206,13 +213,13 @@ DESC familyOperations;
 
 /*FamilyOperations data insertion*/
 
-INSERT INTO familyOperations VALUES
-	(null, 2, 1),
-    (null, 3, 4),
-    (null, 1, 3),
-    (null, 1, 5),
-    (null, 5, 1),
-    (null, 4, 4);
+-- INSERT INTO familyOperations VALUES
+-- 	(null, 2, 1),
+--     (null, 3, 4),
+--     (null, 1, 3),
+--     (null, 1, 5),
+--     (null, 5, 1),
+--     (null, 4, 4);
 
     
 /*Creation of OperationRunning table*/
@@ -233,13 +240,13 @@ DESC operationRunning;
 
 /*OperationRunning data insertion*/
 
-INSERT INTO operationRunning VALUES
-	(null, 1, 4, "running", NOW()),
-    (null, 2, 3, "stopped", NOW()),
-    (null, 3, 2, "running", NOW()),
-    (null, 4, 4, "running", NOW()),
-    (null, 5, 5, "stopped", NOW()),
-    (null, 6, 2, "running", NOW());
+-- INSERT INTO operationRunning VALUES
+-- 	(null, 1, 4, "running", NOW()),
+--     (null, 2, 3, "stopped", NOW()),
+--     (null, 3, 2, "running", NOW()),
+--     (null, 4, 4, "running", NOW()),
+--     (null, 5, 5, "stopped", NOW()),
+--     (null, 6, 2, "running", NOW());
 
 
 
@@ -255,11 +262,6 @@ SELECT * FROM family;
 SELECT * FROM familyOperations;
 SELECT * FROM companyOperations;
 
-SELECT * FROM machine WHERE idMachine = 1
-AND isUsing = "not";
-
-
-
 /*-----------------------------------------------------*/
 
 /* SQL SERVER - AZURE */
@@ -272,12 +274,18 @@ CREATE TABLE company
     CNPJ VARCHAR (14) UNIQUE
 );
 
+-- INSERT INTO company
+--     (companyName, companyEmail, CNPJ)
+-- VALUES
+--     ('SPTech', 'sptechschool@gmail.com', '12345678901234'),
+--     ('ETEC', 'etecschoo@gmail.com', '09876543210987');
+
 CREATE TABLE consumer
 (
     idConsumer INT PRIMARY KEY IDENTITY(1,1),
     consumerName VARCHAR (50),
     consumerEmail VARCHAR (50) UNIQUE,
-    consumerPassword VARBINARY(150),
+    consumerPassword VARCHAR(150),
     management VARCHAR (8),
     CONSTRAINT chkManagement CHECK 
 	(management = 'MASTER' or management = 'ADMIN' or management = 'ANALYST'),
@@ -285,6 +293,11 @@ CREATE TABLE consumer
     fkManager INT FOREIGN KEY REFERENCES consumer(idConsumer),
     fkCompany INT FOREIGN KEY REFERENCES company(idCompany)
 );
+
+-- INSERT INTO consumer(consumerName, consumerEmail, consumerPassword, management, fkCompany) VALUES 
+-- 	('test', 'test@gmail.com', '1234', 'MASTER', 1),
+--  ('test2', 'test2@gmail.com', '1234', 'MASTER', 2);
+
 
 CREATE TABLE family
 (
@@ -299,7 +312,7 @@ CREATE TABLE family
 CREATE TABLE machine
 (
     idMachine INT PRIMARY KEY IDENTITY(1,1),
-    manoCode VARCHAR (30) UNIQUE,
+    manoCode VARCHAR (30),
     machineName VARCHAR (20),
     dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
     isUsing CHAR(3) DEFAULT 'not',
@@ -365,4 +378,3 @@ CREATE TABLE operationRunning
     fkMachine INT FOREIGN KEY REFERENCES Machine(idMachine),
     fkOperation INT FOREIGN KEY REFERENCES Operation(idOperation)
 );
-
