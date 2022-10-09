@@ -27,7 +27,6 @@ INSERT INTO company VALUES
 --     (null, "Escola Adventista do Sul", "adventistadosul@outlook.com", "12345654321234"),
 --     (null, "Colegio da PM Centro", "colegiopmcen@outlook.com", "09876567890987"),
 --     (null, "Colegio Grili Magalhães", "grilimagalhaes@outlook.com", "10293847565748");
-    
 
 /*Creation of Consumer table*/
 CREATE TABLE consumer (
@@ -136,7 +135,7 @@ DESC constantHardware;
 /*Creation of DynamicHardware table*/
 CREATE TABLE dynamicHardware (
 	idDynamicHardware INT PRIMARY KEY AUTO_INCREMENT,
-	cpu VARCHAR(80),
+	cpu INT,
 	ram INT,
 	activityTime INT,
 	fkMachine INT,
@@ -183,7 +182,7 @@ CREATE TABLE companyOperations (
     FOREIGN KEY (fkOperation) REFERENCES operation(idOperation),
     PRIMARY KEY (idCompanyOperations, fkCompany, fkOperation)
 );
-    
+
 /*Description of CompanyOperations table*/    
 DESC companyOperations;
 
@@ -221,7 +220,7 @@ DESC familyOperations;
 --     (null, 5, 1),
 --     (null, 4, 4);
 
-    
+
 /*Creation of OperationRunning table*/
 CREATE TABLE operationRunning (
 	idOperationRunning INT AUTO_INCREMENT,
@@ -247,7 +246,6 @@ DESC operationRunning;
 --     (null, 4, 4, "running", NOW()),
 --     (null, 5, 5, "stopped", NOW()),
 --     (null, 6, 2, "running", NOW());
-
 
 
 /*Beginning of the selects (data showing):*/
@@ -338,7 +336,7 @@ CREATE TABLE constantHardware
 CREATE TABLE dynamicHardware
 (
     idDynamicHardware INT PRIMARY KEY IDENTITY(1,1),
-    cpu VARCHAR(80),
+    cpu INT,
     ram INT,
     activityTime INT,
     fkMachine INT FOREIGN KEY REFERENCES machine(idMachine)
