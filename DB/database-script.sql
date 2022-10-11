@@ -85,7 +85,7 @@ DESC family;
 /*Creation of Machine table*/
 CREATE TABLE machine (
 	idMachine INT PRIMARY KEY AUTO_INCREMENT,
-    manoCode VARCHAR (30),
+    manoCode VARCHAR (60),
     machineName VARCHAR (20),
     dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
     isUsing CHAR(3) DEFAULT 'not', CONSTRAINT chkMachineUse CHECK 
@@ -311,7 +311,7 @@ CREATE TABLE family
 CREATE TABLE machine
 (
     idMachine INT PRIMARY KEY IDENTITY(1,1),
-    manoCode VARCHAR (30),
+    manoCode VARCHAR (60),
     machineName VARCHAR (20),
     dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
     isUsing CHAR(3) DEFAULT 'not',
