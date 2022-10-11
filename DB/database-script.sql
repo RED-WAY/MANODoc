@@ -48,16 +48,16 @@ DESC Consumer;
 
 /*Consumer data insertion*/
 INSERT INTO consumer VALUES 
-    (NULL, 'test', 'test@gmail.com', AES_ENCRYPT("1234", "corinthians"), 'MASTER', DEFAULT, NULL, 1),
-    (NULL, 'test2', 'test2@gmail.com', AES_ENCRYPT("1234", "corinthians"), 'MASTER', DEFAULT, NULL, 2);
+    (NULL, 'test', 'test@gmail.com', "1234", 'MASTER', DEFAULT, NULL, 1),
+    (NULL, 'test2', 'test2@gmail.com', "1234", 'MASTER', DEFAULT, NULL, 2);
 -- INSERT INTO consumer VALUES 
--- 	(null, "test", "test@gmail.com", AES_ENCRYPT("1234", "corinthians"), "MASTER", default, null, 1),
---     (null, "test2", "test2@gmail.com", AES_ENCRYPT("1234", "corinthians"), "MASTER", default, null, 2),
---     (null, "Danillo Borba", "danborba@gmail.com", AES_ENCRYPT("Baa34569034", "corinthians"), "MASTER", default, 1, 1),
---     (null, "Paulo Ranea", "paulogono@hotmail.com", AES_ENCRYPT("UUU38535850", "corinthians"), "ADMIN", default, 2, 2),
---     (null, "Andrey Gigabyte", "andgiga@gmail.com", AES_ENCRYPT("Dew255948947", "corinthians"), "ADMIN", default, 3, 1),
---     (null, "Arthur Itaquerense", "artitaq@gmail.com", AES_ENCRYPT("bwf36234366", "corinthians"), "ANALYST", default, 1, 1),
---     (null, "Vinicius Mengo", "vinicinho@gmail.com", AES_ENCRYPT("Ab45579021", "corinthians"), "ANALYST", default, null, 3);
+-- 	(null, "test", "test@gmail.com", "1234", "MASTER", default, null, 1),
+--     (null, "test2", "test2@gmail.com", "1234", "MASTER", default, null, 2),
+--     (null, "Danillo Borba", "danborba@gmail.com", "Baa34569034", "MASTER", default, 1, 1),
+--     (null, "Paulo Ranea", "paulogono@hotmail.com", "UUU38535850", "ADMIN", default, 2, 2),
+--     (null, "Andrey Gigabyte", "andgiga@gmail.com", "Dew255948947", "ADMIN", default, 3, 1),
+--     (null, "Arthur Itaquerense", "artitaq@gmail.com", "bwf36234366", "ANALYST", default, 1, 1),
+--     (null, "Vinicius Mengo", "vinicinho@gmail.com", "Ab45579021", "ANALYST", default, null, 3);
 
 /*Creation of Family table*/
 CREATE TABLE family (
