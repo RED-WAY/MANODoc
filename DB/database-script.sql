@@ -137,7 +137,6 @@ CREATE TABLE dynamicHardware (
 	idDynamicHardware INT PRIMARY KEY AUTO_INCREMENT,
 	cpu INT,
 	ram INT,
-	activityTime VARCHAR(30),
     dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
 	fkMachine INT,
 	FOREIGN KEY (fkMachine) REFERENCES machine(idMachine)
@@ -339,7 +338,6 @@ CREATE TABLE dynamicHardware
     idDynamicHardware INT PRIMARY KEY IDENTITY(1,1),
     cpu INT,
     ram INT,
-    activityTime VARCHAR(30),
     dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
     fkMachine INT FOREIGN KEY REFERENCES machine(idMachine)
 );
