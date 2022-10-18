@@ -153,8 +153,7 @@ DESC dynamicHardware;
 /*Creation of Operation table*/
 CREATE TABLE operation (
 	idOperation INT PRIMARY KEY AUTO_INCREMENT,
-	operationName VARCHAR (50),
-	operationPath VARCHAR (300),
+	operationName VARCHAR (100) NOT NULL UNIQUE,
 	operationType CHAR (7), CONSTRAINT chkOperationType CHECK 
 	(operationType = "web" or operationType = "desktop")
 );
@@ -345,8 +344,8 @@ CREATE TABLE dynamicHardware
 CREATE TABLE operation
 (
     idOperation INT PRIMARY KEY IDENTITY(1,1),
-    operationName VARCHAR (50),
-    operationPath VARCHAR (150),
+    operationName VARCHAR (100) NOT NULL,
+    CONSTRAINT UQ_OperationName UNIQUE (operationName),
     operationType CHAR (7),
     CONSTRAINT chkOperationType CHECK 
 	(operationType = 'web' or operationType = 'desktop')
