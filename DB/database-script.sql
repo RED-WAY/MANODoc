@@ -221,16 +221,13 @@ DESC familyOperations;
 
 
 /*Creation of OperationRunning table*/
-CREATE TABLE operationRunning (
+CREATE TABLE operationKilled (
 	idOperationRunning INT AUTO_INCREMENT,
+    dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
 	fkMachine INT,
 	FOREIGN KEY (fkMachine) REFERENCES Machine(idMachine),
     fkOperation INT,
-    FOREIGN KEY (fkOperation) REFERENCES Operation(idOperation),
-    PRIMARY KEY (idOperationRunning, fkMachine, fkOperation),
-    operationStats CHAR (7), CONSTRAINT chkOperationStats CHECK 
-	(operationStats = "running" or operationStats = "stopped"),
-    lastUsed DATETIME DEFAULT CURRENT_TIMESTAMP
+    FOREIGN KEY (fkOperation) REFERENCES Operation(idOperation)
 );
 
 /*Description of OperationRunning table*/
@@ -253,7 +250,7 @@ SELECT * FROM consumer;
 SELECT * FROM company;
 SELECT * FROM machine;
 SELECT * FROM hardware;
-SELECT * FROM operationRunning;
+SELECT * FROM operationKilled;
 SELECT * FROM operation;
 SELECT * FROM family;
 SELECT * FROM familyOperations;
@@ -365,13 +362,10 @@ CREATE TABLE familyOperations
     fkFamily INT FOREIGN KEY REFERENCES family(idFamily)
 );
 
-CREATE TABLE operationRunning
+CREATE TABLE operationKilled
 (
-    idOperationRunning INT PRIMARY KEY IDENTITY(1,1),
-    operationStats CHAR (7),
-    CONSTRAINT chkOperationStats CHECK 
-	(operationStats = 'running' or operationStats = 'stopped'),
-    lastUsed DATETIME DEFAULT CURRENT_TIMESTAMP,
+    idOperationKilled INT PRIMARY KEY IDENTITY(1,1),
+    dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
     fkMachine INT FOREIGN KEY REFERENCES Machine(idMachine),
     fkOperation INT FOREIGN KEY REFERENCES Operation(idOperation)
 );
