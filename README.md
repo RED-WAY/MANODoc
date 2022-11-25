@@ -1,8 +1,7 @@
-# MANODoc
+# manOS - Process Killer
 
-<h1> manOS </h1>
-
-Dentro deste repositório estão as informações necessárias para a instalação e uso do nosso produto<br>
+Dentro deste repositório estão as informações necessárias para a instalação e uso do nosso produto;<br>
+<link rel="stylesheet" href="https://github.com/RED-WAY/MANOInstallation">
 No momento em que o cliente fechar um contrato de serviço conosco, ele receberá um link aonde o mesmo será redirecionado para nossos repositórios
 Em seguida ele ira clonar nossos repositorios e dentro do repositório  #MANOInstalation tera acesso ao assistente de instalação;<br>
 esse assistente que por sua vez irá verificar se a maquina do cliente tem os recursos e programas necessários para o uso do nosso produto, 
