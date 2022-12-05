@@ -226,9 +226,9 @@ CREATE TABLE operationKilled (
 	idOperationRunning INT PRIMARY KEY AUTO_INCREMENT,
     dtAdded DATETIME DEFAULT CURRENT_TIMESTAMP,
 	fkMachine INT,
-	FOREIGN KEY (fkMachine) REFERENCES Machine(idMachine),
+	FOREIGN KEY (fkMachine) REFERENCES machine(idMachine),
     fkOperation INT,
-    FOREIGN KEY (fkOperation) REFERENCES Operation(idOperation)
+    FOREIGN KEY (fkOperation) REFERENCES operation(idOperation)
 );
 
 /*Description of OperationKilled table*/
